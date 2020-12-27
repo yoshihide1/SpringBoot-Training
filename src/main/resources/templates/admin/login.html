@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>管理者用ログイン画面</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container justify-content-center mt-5">
+    <h2 class="my-3 ">ログイン（管理者）</h2>
+    <hr>
+    <div class="d-flex justify-content-center mt-5">
+      <div th:if="${param.error}" class="alert alert-danger">
+        管理者名またはパスワードが正しくありません
+      </div>
+      <form th:action="@{/admin/login}" method="post">
+        <div class="form-group">
+          <label for="name">管理者名</label>
+          <input type="name" class="form-control" name="name" placeholder="Name">
+          <small id="nameHelp" class="form-text text-muted">※半角英数字で入力してください。</small>
+        </div>
+        <div class="form-group">
+          <label for="password">パスワード</label>
+          <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <input type="submit" class="btn btn-primary" value="ログイン" />
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.example.training.common.repository.OrderRepository">
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO orders (member_id, phone, name, address, email, price, date)
+		VALUES(
+		"${memberId}",
+		"${phone}",
+		"${name}",
+		"${address}",
+		"${email}",
+		${price},
+		"${date}")
+	</insert>
+
+	<insert id="saveItem">
+
+		INSERT INTO order_items (order_id, name, price,
+		quantity, image_path)
+		VALUES(
+		${id},
+		"${item.name}",
+		${item.price},
+		${item.quantity},
+		"${item.imagePath}"
+		)
+	</insert>
+
+	<select id="findItemsByOrder"
+		resultType="com.example.training.common.domain.OrderItem">
+		SELECT
+		name, price, quantity
+		FROM
+		order_items
+		WHERE order_id =
+		${id}
+
+	</select>
+
+	<select id="findById"
+		resultType="com.example.training.common.domain.Order">
+		SELECT
+		*
+		FROM
+		orders
+		WHERE id = ${id}
+	</select>
+
+	<select id="findByOrderMonth"
+		resultType="com.example.training.common.domain.OrderMonth">
+		select
+		id as "orderId",
+		`date`
+		from orders as o
+		where member_id = ${id}
+		order by `date` desc
+	</select>
+	
+	<select id="findByOrderHistory"
+		resultType="com.example.training.common.domain.OrderItem">
+		select
+		name, price, quantity, image_path as imagePath
+		from
+		ORDER_ITEMS
+		where order_id =
+		${id}
+</select>
+	<select id="findByOrderItem"
+		resultType="com.example.training.common.domain.OrderItem">
+		SELECT
+		name,
+		price,
+		quantity,
+		image_path as "imagePath"
+		FROM
+		order_items
+		WHERE order_id = ${id}
+
+	</select>
+
+</mapper>

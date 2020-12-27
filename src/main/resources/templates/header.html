@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav th:fragment="header" class="navbar navbar-light bg-primary py-3 mb-3">
+        <a href="/"><span class="badge badge-dark p-3">ホーム</span></a>
+        <b th:text="${session?.ADMIN?.name}" class="navbar-text"></b>
+        <form class="form-inline mx-auto" action="/search" th:object="${freeWord}" method="POST">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="freeWord" th:value="${value}" required>
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div>
+            <!-- アイコンに変更する -->
+            <a href="/member/cart/list"><span class="btn btn-dark mx-2">カート</span></a>
+        </div>
+        <div class="dropdown">
+            <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                メニュー
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{/member/cart/list}">カート</a>
+                <a class="dropdown-item" href="#">サンプル</a>
+                <a class="dropdown-item" href="#">サンプル</a>
+                <a class="dropdown-item" href="#">サンプル</a>
+                <a class="dropdown-item" href="#">サンプル</a>
+                <a class="dropdown-item" href="#">サンプル</a>
+            </div>
+        </div>
+        <div class="text-center" th:if="${session?.ADMIN?.name == null && session?.MEMBER?.email == null}">
+            <a href="/member/login"><span class="btn btn-dark mx-2">ログイン</span></a>
+            <a href="/member/applicate"><span class="btn btn-dark mx-2">新規登録</span></a>
+        </div>
+    </nav>
+</body>
+</html>

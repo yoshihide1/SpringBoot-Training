@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div th:replace="/admin/header :: admin-header"></div>
+  <div class="container pt-5">
+    <h1>管理者権限</h1>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="/admin/members">会員一覧画面</a></li>
+    </ul>
+    <div th:replace="home">
+    </div>
+  </div>
+</body>
+</html>

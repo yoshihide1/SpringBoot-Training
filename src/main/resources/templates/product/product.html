@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Hello</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<body>
+	<div th:replace="header"></div>
+
+	<div>
+		<div class="container">
+			<div class="row">
+				<div class="col">画像</div>
+				<!-- 画像部には*{image_path}なり画像リンクを持ってくる -->
+				<div class="col">
+					<table>
+						<tr>
+							<!-- 名前部には th:text= "*{name}"を持ってくる -->
+							<td th:text="*{product.name}">名前</td>
+						</tr>
+						<tr>
+							<!-- 単価部には th:text= "*{price}"を持ってくる -->
+							<td th:text="*{product.price}">単価</td>
+						</tr>
+						<tr>
+							<form action="/member/cart">
+								<td>数量</td>
+								<td><input type="hidden" name="" id=""></td>
+								<td><input type="number" min="0"></td>
+								<td><input type="submit" value="送信"></td>
+							</form>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br> <br> <br>
+		<div>
+			<p th:text="|*{product.description}を記入する|"></p>
+		</div>
+	</div>
+</body>
+</html>

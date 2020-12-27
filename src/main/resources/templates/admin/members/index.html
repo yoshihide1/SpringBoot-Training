@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+  <title>会員一覧画面</title>
+</head>
+<body>
+  <div th:replace="/admin/header :: admin-header"></div>
+  <div class="container pt-5">
+    <h2>会員一覧画面</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 10%">id</th>
+          <th style="width: 20%">メールアドレス</th>
+          <th style="width: 20%">住所</th>
+          <th style="width: 10%">最終編集者</th>
+          <th style="width: 10%">状態</th>
+          <th style="width: 10%">権限</th>
+          <th style="width: 20%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="member:${members}" th:object="${member}">
+          <td th:text="*{id}"></td>
+          <td th:text="*{email}"></td>
+          <td th:text="*{address}"></td>
+          <td th:text="*{lastUpdatedBy}"></td>
+          <td th:text="*{status}" class="text-danger"></td>
+          <td th:text="*{roles}"></td>
+          <td>
+            <form>
+              <a class="btn btn-primary btn-sm" th:href="@{/admin/members/{id}/edit(id=*{id})}">編集</a>
+            </form>
+          </td>
+      </tbody>
+    </table>
+    <div th:replace="home"></div>
+  </div>
+</body>
+</html>

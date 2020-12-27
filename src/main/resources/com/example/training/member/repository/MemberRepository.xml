@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.training.member.repository.MemberRepository">
+	<select id="findByEmail"
+		resultType="com.example.training.member.domain.Member">
+		SELECT
+		*
+		FROM
+		members
+		WHERE
+		email = "${email}"
+	</select>
+
+	<select id="findById" resultType="com.example.training.member.domain.Member">
+		SELECT * FROM members WHERE id = "${id}"
+	</select>
+
+	<select id="findAll" resultType="com.example.training.member.domain.Member">
+		SELECT * FROM members
+	</select>
+
+	<insert id="create" useGeneratedKeys="true">
+		INSERT INTO members (email, password, address, lastUpdatedBy, status) VALUES (
+			"${member.email}",
+			"${digest}",
+			"${member.address}",
+			"none",
+			"unapproved"
+		)
+	</insert>
+
+	<update id="update">
+    UPDATE members SET
+			email=#{member.email},
+			password=#{digest},
+			address=#{member.address},
+			lastUpdatedBy=#{lastUpdatedBy},
+			status=#{member.status}
+			WHERE id= #{member.id}
+	</update>
+
+</mapper>
